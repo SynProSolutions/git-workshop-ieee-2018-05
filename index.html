@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Git Workshop für fortgeschrittene Einsteiger / SynPro Solutions @ IEEE Student Branch Graz /09.05.2018</title>
+    <meta charset="utf-8">
+    <style>
+      @font-face {
+        font-family: 'Yanone Kaffeesatz';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(fonts/yanonekaffeesatz-regular.ttf) format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Droid Serif Italic'), local('DroidSerif-Italic'), url(fonts/droid-serif-italic.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Droid Serif Regular'), local('DroidSerif-Regular'), url(fonts/droid-serif-regular.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Droid Serif';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Droid Serif Bold'), local('DroidSerif-Bold'), url(fonts/droid-serif-bold.ttf) format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Ubuntu Mono Italic'), local('UbuntuMono-Italic'), url(fonts/ubuntu-mono-italic.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(fonts/ubuntu-mono.ttf) format('truetype');
+      }
+      @font-face {
+        font-family: 'Ubuntu Mono';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Ubuntu Mono Bold'), local('UbuntuMono-Bold'), url(fonts/ubuntu-mono-bold.ttf) format('truetype');
+      }
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .remark-slide-content > ul li, .remark-slide-content > ol li { margin: 1.4em 1em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+      .remark-slide-content > .nospace-rows li { margin: auto 1.1rem; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+<!-- begin of slide content -->
+
+# Git Workshop für fortgeschrittene Einsteiger
+
+.center[<a href="https://xkcd.com/1597/">![xckd git](includes/xkcd-git.png)</a>]
+
+---
+
+# Agenda für Workshop
+
+<img alt="IEEE Student Branch Graz" src="includes/ieee_graz.png" style="float:right" />
+IEEE Student Branch Graz / 09.05.2018
+
+1. Vorstellungsrunde
+2. Arbeiten mit Git
+3. Zeit für Fragen
+
+---
+
+# Wer sind wir?
+
+.center[<a href="https://synpro.solutions/?git-workshop-ieee-2018-05">![SynPro Solutions](includes/synpro.png)</a>]
+
+<table>
+<tr><td><strong>Darshaka Pathirana:</strong></td><td>Git-User seit 2009</td></tr>
+<tr><td><strong>Michael Prokop:</strong</td><td>Git-User seit 2006</td></tr>
+</table>
+
+Wir bieten Systemadministration und -integration für KMUs (Schwerpunkt Linux) an.
+Heterogene Umgebungen gehören aber zu unserem Alltag.
+
+Git verwenden wir täglich und ist für uns unverzichtbar.
+
+---
+
+# Vorstellungsrunde
+
+* Wer war bei unserem letzten Workshop dabei?
+* Was erwartest du dir vom Workshop? Wünsche / Vorschläge?
+
+---
+
+## Github-Forks von lorem-ipsum
+
+<div style="text-align:center">
+  <a href="https://github.com/SynProSolutions/lorem-ipsum/network">
+    <img src="includes/lorem-ipsum-forks.png" alt="SynProSolutions / lorem-ipsum Forks" style="width: 100%"/>
+  </a>
+</div>
+
+---
+
+# Folien vom Einsteigerworkshop
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018.git</span>
+</code></pre>
+
+<a href="https://synpro.solutions/git-workshop-ieee-2018">https://synpro.solutions/git-workshop-ieee-2018</a>
+
+---
+
+# Voraussetzungen
+
+* Git ist installiert
+* Git ist konfiguriert (Name, Email, Editor)
+
+---
+
+# Praxis
+
+## Forken und Clonen
+
+1. Fork von <a href="https://github.com/SynProSolutions/lorem-ipsum-advanced">lorem-ipsum-advanced</a>
+2. Clone von lorem-ipsum-advanced
+
+--
+
+## Neue Datei hinzufügen (add / commit)
+
+* git add douglas-adams.txt
+* git commit
+* git show
+* git log
+
+---
+
+# Dateien verschieben und löschen
+
+* git mv douglas-adams.txt adams.txt
+* git rm
+
+--
+
+# Ändergungen rückgängig machen
+
+* falschen Text in `adams.txt` hinzufügen
+* git diff
+* git checkout -- adams.txt
+
+---
+
+# git add rückgängig machen
+
+* falschen Text in `adams.txt` hinzufügen
+* git diff
+* git add adams.txt
+* git diff / git diff --cached
+* git status
+* git reset adams.txt
+* git checkout -- adams.txt
+
+---
+
+# Aufgabe:
+
+Wir schreiben ein Buch!
+
+* Kapitel mit zufälligem Artikel aus Wikipedia:
+<a href="https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite">https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite</a>
+* Infos zum Github Markdown: https://help.github.com/articles/basic-writing-and-formatting-syntax/
+* Jeder Absatz ein eigener Commit!
+* git add $random_artikel   # z.B. harlequin-syndrom.txt
+* git commit
+
+---
+
+# Interessante Git-Befehle 1
+
+* git grep
+* git commit --amend
+* git rebase -i (reword)
+* git revert
+* git cherry-pick -x
+
+---
+
+# Interessante Git-Befehle 2
+
+* git branch -d / -D
+* git rm --cached
+* git tag
+* git merge
+* git format-patch
+* git reflog
+* man git-rev-parse
+
+---
+
+# Interessante Git-Befehle 3
+
+* Which topic branches are not merged yet?
+<pre>
+% git branch -a --no-merged
+</pre>
+
+* Find out which branch/tag contains a change
+<pre>
+% git branch -a --contains $ID
+</pre>
+
+---
+
+# Git aliases
+
+<pre>
+% git config --global alias.st status
+% git config --global alias.d diff
+% git config --global alias.l log
+% cat .gitconfig 
+[alias]
+        st = status
+        d = diff
+        l = log
+</pre>
+
+---
+
+# Git history löschen (Achtung!)
+
+* git reset --soft COMMIT-ID
+* git reset --hard COMMIT-ID
+
+---
+
+# git log advanced
+
+* git log *.txt
+* git log 
+
+--
+
+misc
+
+* merge conflicts
+
+---
+
+## Branch anlegen
+
+* git branch herkunft
+* git branch
+* git checkout herkunft
+
+--
+
+oder
+
+* git checkout -b herkunft
+* git branch
+
+--
+
+## Datei dem Branch hinzufügen
+
+* git add herkunft.txt
+* git commit
+
+---
+
+## weitere Branches
+
+---
+
+# Weiterführende Literatur
+
+## Git
+
+<ul class="nospace-rows">
+<li>"git $cmd --help" bzw. <a href="https://www.kernel.org/pub/software/scm/git/docs/">Manpages</a>
+<li>Freies deutsches (Online-)Buch zu Git: <a href="http://gitbu.ch/">http://gitbu.ch/</a>
+<li>Freies englisches (Online-)Buch zu Git: <a href="https://book.git-scm.com/book/">https://book.git-scm.com/book/</a> (deutsche, aber ältere Version: <a href="https://git-scm.com/book/de/">https://git-scm.com/book/de/</a>)
+<li>Flight rules for Git: <a href="https://github.com/k88hudson/git-flight-rules">https://github.com/k88hudson/git-flight-rules</a>
+<li>Git Cheat Sheet: <a href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf">https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf</a>
+<li>Dokumentation von Archlinux: <a href="https://wiki.archlinux.org/index.php/Git">https://wiki.archlinux.org/index.php/Git</a>
+<li>gittutorial man page: <a href="https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html</a>
+</ul>
+
+## Git-Workflow
+
+<ul class="nospace-rows">
+<li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows">https://www.atlassian.com/git/tutorials/comparing-workflows</a>
+<li><a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows</a>
+</ul>
+
+---
+
+# Danke für die Aufmerksamkeit
+
+Und wo gibt's diese Folien? Natürlich via Git:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018-05.git</span>
+</code></pre>
+
+<br>
+<br>
+
+.center[<a href="https://synpro.solutions/?git-workshop-ieee-2018">![SynPro Solutions](includes/synpro.png)</a>]
+
+<div style="text-align:center">
+  <a href="https://twitter.com/synprosolutions">
+  @SynProSolutions <img src="includes/Twitter_Logo_Blue.png" alt="SynPro Solutions on Twitter" style="width: 75px; vertical-align: -25px;" />
+  </a>
+</div>
+
+<!-- end of slide content -->
+    </textarea>
+    <script src="includes/remark.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+  </body>
+</html>
