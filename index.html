@@ -220,22 +220,33 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 
 ---
 
-# Folien vom Einsteigerworkshop
+# Workshopfolien
+
+1) Folien vom Einsteigerworkshop:
 
 <pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018.git</span>
 </code></pre>
 
 bzw. online:
 
-<a href="https://synpro.solutions/git-workshop-ieee-2018">https://synpro.solutions/git-workshop-ieee-2018</a>
+https://synpro.solutions/git-workshop-ieee-2018/
+
+2) Folien von <strong>diesem</strong> Workshop:
+
+<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018-05.git</span>
+</code></pre>
+
+bzw. online:
+
+https://synpro.solutions/git-workshop-ieee-2018-05/
 
 ---
 
-# Voraussetzungen
+# Was wir heute benötigen
 
-* Git ist installiert
-* Git ist konfiguriert (Name, Email, Editor)
-* Github-Account
+* Git installiert
+* Git (vor)konfiguriert (Name, Email, Editor, check via `git config -l`)
+* Github-Account (anlegen via https://github.com/join)
 
 ---
 
@@ -243,7 +254,7 @@ bzw. online:
 
 ## Forken und Clonen
 
-1. Fork von <a href="https://github.com/SynProSolutions/lorem-ipsum-advanced">https://github.com/SynProSolutions/lorem-ipsum-advanced</a>
+1. Fork von https://github.com/SynProSolutions/lorem-ipsum-advanced
 2. Clone von lorem-ipsum-advanced
 
 ---
@@ -256,63 +267,100 @@ $ git show
 $ git log
 </code></pre>
 
-* Infos zum Github Markdown: <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">https://help.github.com/articles/basic-writing-and-formatting-syntax/</a>
+* Ziel: ähnlich https://github.com/jkirk/git-workshop-playground/blob/master/schloss_leesdorf.md
+* Infos zum Github Markdown: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 * Tipp: https://github.com/$GITHUB_ACCOUNT/lorem-ipsum-advanced/edit/master/douglas-adams.md zum Testen der Markdown-Syntax
 
 ---
 
 # Dateien verschieben
 
+Upps, wir haben den falschen Dateinamen gewählt:
+
 <pre><code class="plain hljs remark-code">$ git mv douglas-adams.md adams.md
 $ git commit -m "Rename douglas-adams.md to adams.md"
 </code></pre>
 
---
+---
 
-# Datei löschen + rückgängig machen
+# Datei versehentlich modifiziert
+
+<pre><code class="plain hljs remark-code">$ rm adams.md
+$ git status
+$ git checkout -- adams.md
+</code></pre>
+
+Aber Achtung: bei `checkout` ist jede Dateiänderung damit auch futsch!
+
+---
+
+# Änderung im Git rückgängig machen
+
+Datei versehentlich hinzugefügt:
 
 <pre><code class="plain hljs remark-code">$ git rm adams.md
 $ git commit -m "Delete adams.md"
 $ git revert HEAD
 </code></pre>
 
----
+Typofix war doch kein Typo:
 
-# Änderungen rückgängig machen
-
-* falschen Text in `adams.md` hinzufügen
-
-<pre><code class="plain hljs remark-code">$ git diff
-$ git checkout -- adams.md
+<pre><code class="plain hljs remark-code">$ git add adams.md
+$ git commit -m "Fix typo in adams.md"
+$ git revert HEAD
 </code></pre>
 
---
+---
 
-# git add rückgängig machen
+# Ein git add rückgängig machen
 
 * falschen Text in `adams.md` hinzufügen
 
 <pre><code class="plain hljs remark-code">$ git diff
 $ git add adams.md
-$ git diff / git diff --cached
 $ git status
+$ git diff / git diff --cached
 $ git reset adams.md
-$ git checkout -- adams.md
+$ git status
+$ git diff / git diff --cached
 </code></pre>
 
 ---
 
-# Aufgabe:
+# Letzten Commit ändern
 
-Wir schreiben ein Buch!
+Commit-Message ändern:
+
+<pre><code class="plain hljs remark-code">$ git commit --amend
+</code></pre>
+
+Datei zum letzten Commit hinzufügen:
+
+<pre><code class="plain hljs remark-code">$ git add demo.md
+$ git commit --amend
+</code></pre>
+
+---
+
+# Aufgabe - Wir schreiben ein Buch!
 
 * Kapitel mit zufälligem Artikel aus Wikipedia:
 <a href="https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite">https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite</a>
-* Infos zum Github Markdown: https://help.github.com/articles/basic-writing-and-formatting-syntax/
-* Jeder Absatz ein eigener Commit!
+* Jeder Absatz ein eigener Commit (damit wir hier jetzt viele Commits zusammenbekommen)!
 
 <pre><code class="plain hljs remark-code">$ git add $random_artikel   # z.B. harlequin-syndrom.md
 $ git commit
+$ git add -p $random_artikel ; git commit
+</code></pre>
+
+* Pull-Request gegen https://github.com/SynProSolutions/lorem-ipsum-advanced -&gt; SynPro vereinigt die Artikel aus den PRs
+
+* Für Interessierte, geforktes Repository (Buch) synchronisieren:
+
+<pre><code class="plain hljs remark-code">$ git remote add upstream https://github.com/SynProSolutions/lorem-ipsum-advanced
+$ git fetch upstream
+$ git checkout master
+$ git merge upstream/master
 </code></pre>
 
 ---
@@ -339,11 +387,142 @@ Anwendung:
 $ git d
 $ git l
 $ git ls
+$ git ls 'HEAD^^'
+$ git ls 'HEAD~2'  # s.a. `man git-rev-parse`
 </code></pre>
 
 ---
 
-# Git history ändern (Achtung!)
+# Advanced git log
+
+<pre><code class="plain hljs remark-code">$ git log
+$ git log *.md
+$ git log --author "author@example.org"
+$ git log --since="10 minutes ago"
+$ git log --since="yesterday"
+$ git log --until 2018-05-08
+$ git log --until "2018-05-09 09:30"
+</code></pre>
+
+---
+
+# Branch Handling
+
+<pre><code class="plain hljs remark-code">$ git branch username/coolfeature
+$ git branch
+$ git checkout username/coolfeature
+</code></pre>
+
+--
+
+oder
+
+<pre><code class="plain hljs remark-code">$ git checkout -b username/coolfeature
+$ git branch
+</code></pre>
+
+--
+
+## Datei dem Branch hinzufügen
+
+<pre><code class="plain hljs remark-code">$ git add demo.md
+$ git commit
+</code></pre>
+
+---
+
+# Branches mergen
+
+Auf Zielbranch stellen:
+
+<pre><code class="plain hljs remark-code">$ git checkout master
+</code></pre>
+
+Welche Branches sind noch nicht gemerged:
+
+<pre><code class="plain hljs remark-code">$ git branch -a --no-merged
+</code></pre>
+
+Branch mergen:
+
+<pre><code class="plain hljs remark-code">$ git merge username/coolfeature
+</code></pre>
+
+Gemergten Branch löschen:
+
+<pre><code class="plain hljs remark-code">$ git branch -d username/coolfeature
+</code></pre>
+
+* Anmerkung: `git branch -D` um Branch zu löschen, der noch nicht gemerged wurde
+
+---
+
+# Tagging
+
+Existierende Tags anzeigen:
+
+<pre><code class="plain hljs remark-code">$ git tag
+</code></pre>
+
+Unsignierten Tag erstellen:
+
+<pre><code class="plain hljs remark-code">$ git tag v0.42
+</code></pre>
+
+Unsignierten + annotierten Tag erstellen:
+
+<pre><code class="plain hljs remark-code">$ git tag -a v0.42 [-m "Release v0.42"]
+</code></pre>
+
+Signierten + annotierten Tag erstellen:
+
+<pre><code class="plain hljs remark-code">$ git tag -s v0.42 [-m "Release v0.42"]
+</code></pre>
+
+Bestimmten Tag anzeigen:
+
+<pre><code class="plain hljs remark-code">$ git show v0.42
+</code></pre>
+
+---
+
+# Welcher Tag beinhaltet einen Commit
+
+<pre><code class="plain hljs remark-code">$ git clone https://github.com/systemd/systemd
+$ cd systemd
+$ git show 546e635a4ef2e360e5c3945b40dcd551a4cdaaa6
+$ git tag --contains 546e635a4ef2e360e5c3945b40dcd551a4cdaaa6
+v237
+v238
+</code></pre>
+
+Anmerkung: selbiges für Branches via `git branch -a --contains $ID`
+
+---
+
+# Interessante Git-Befehle
+
+<pre><code class="plain hljs remark-code">$ git grep
+$ git blame demo.md
+$ git rebase -i   # Beispiel: reword
+$ git cherry-pick -x
+$ git rm --cached
+$ git describe
+$ git format-patch
+$ git gc
+$ git reflog
+$ man git-rev-parse
+</code></pre>
+
+---
+
+# Fragen?
+
+* Platz für Pull Requests!
+
+---
+
+# Git History ändern (Achtung!)
 
 <pre><code class="plain hljs remark-code">$ git reset --soft COMMIT-ID
 $ git reset --mixed COMMIT-ID
@@ -361,90 +540,12 @@ $ git commit --amend
 
 # Anwendungsfälle von reset bzw. amend
 
-* amend: Datei letzten Commit hinzufügen/löschen, Commit-Message ändern
-* soft: mehr als nur den letzten Commit ändern (HEAD auf COMMIT-ID stellen, Index behält aber die durchgeführten Änderungen aus dem COmmit)
-* mixed: mehr als nur den letzten Commit ändern (HEAD auf COMMIT-ID stellen, Index hat die Änderungen aber <em>nicht</em>, index entspricht also HEAD -&gt; Dateien sind unstaged)
-* hard: Commits wegwerfen (entspricht --mixed, aber auch Working Directory wird auf COMMIT-ID gestellt und alle Änderungen nach COMMIT-ID verworfen, Achtung!)
+* amend: Datei letztem Commit hinzufügen/löschen, Commit-Message ändern
+* soft: mehr als nur den letzten Commit ändern (setzt HEAD auf COMMIT-ID, Index + Working Tree bleiben unberührt)
+* mixed: mehr als nur den letzten Commit ändern (setzt HEAD und Index auf COMMIT-ID, Working Tree bleibt unberührt -&gt; Dateien sind unstaged)
+* hard: Commits wegwerfen (entspricht --mixed, aber auch Working Directory wird auf COMMIT-ID gestellt, somit sind HEAD, Index und Working Tree identisch - Achtung, Änderungen im Working Tree gehen verloren!)
 
----
-
-# git log advanced
-
-<pre><code class="plain hljs remark-code">$ git log *.md
-$ git log
-</code></pre>
-
----
-
-# Branch anlegen
-
-<pre><code class="plain hljs remark-code">$ git branch herkunft
-$ git branch
-$ git checkout herkunft
-</code></pre>
-
---
-
-oder
-
-<pre><code class="plain hljs remark-code">$ git checkout -b herkunft
-$ git branch
-</code></pre>
-
---
-
-## Datei dem Branch hinzufügen
-
-<pre><code class="plain hljs remark-code">$ git add herkunft.md
-$ git commit
-</code></pre>
-
---
-
-## weitere Branches
-
----
-
-# Interessante Git-Befehle 1
-
-<pre><code class="plain hljs remark-code">$ git grep
-$ git commit --amend
-$ git rebase -i (reword)
-$ git cherry-pick -x
-</code></pre>
-
----
-
-# Interessante Git-Befehle 2
-
-<pre><code class="plain hljs remark-code">$ git branch -d / -D
-$ git rm --cached
-$ git tag
-$ git merge
-$ git format-patch
-$ git reflog
-$ man git-rev-parse
-</code></pre>
-
----
-
-# Interessante Git-Befehle 3
-
-Welche Branches sind noch nicht gemerged:
-
-<pre><code class="plain hljs remark-code">$ git branch -a --no-merged
-</code></pre>
-
-Welcher branch/tag beinhaltet einen Commit:
-
-<pre><code class="plain hljs remark-code">$ git branch -a --contains $ID
-</code></pre>
-
----
-
-# TODO
-
-* merge conflicts
+Lesetipp: http://gitbu.ch/ch03.html#sec.reset
 
 ---
 
@@ -471,17 +572,16 @@ Welcher branch/tag beinhaltet einen Commit:
 
 ---
 
-# Danke für die Aufmerksamkeit
-
-Und wo gibt's diese Folien? Natürlich via Git:
-
-<pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018-05.git</span>
-</code></pre>
+# Danke für eure Aufmerksamkeit
 
 <br>
 <br>
 
-.center[<a href="https://synpro.solutions/?git-workshop-ieee-2018">![SynPro Solutions](includes/synpro.png)</a>]
+.center[<a href="https://synpro.solutions/?git-workshop-ieee-2018-05">![SynPro Solutions](includes/synpro.png)</a>]
+
+<div style="text-align:center">
+  office (at) synpro.solutions
+</div>
 
 <div style="text-align:center">
   <a href="https://twitter.com/synprosolutions">
@@ -490,6 +590,7 @@ Und wo gibt's diese Folien? Natürlich via Git:
 </div>
 
 <!-- end of slide content -->
+
     </textarea>
     <script src="includes/remark.js">
     </script>
