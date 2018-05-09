@@ -350,9 +350,9 @@ $ git commit --amend
 <a href="https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite">https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite</a>
 * Jeder Absatz ein eigener Commit (damit wir hier jetzt viele Commits zusammenbekommen)!
 
-<pre><code class="plain hljs remark-code">$ git checkout -b user/pr_$artikel 1f63431259a  # auf 1. commit stellen
-$ git add $random_artikel ; git commit          # z.B. harlequin-syndrom.md
-$ git add -p $random_artikel ; git commit
+<pre><code class="plain hljs remark-code">$ git checkout -b $user/pr_$artikel 1f63431259  # auf 1. commit stellen
+$ git add    $random_artikel ; git commit          # z.B. harlequin-syndrom.md
+$ git add -p $random_artikel ; git commit          # und schlussendlich pushen
 </code></pre>
 
 * Pull-Request gegen https://github.com/SynProSolutions/lorem-ipsum-advanced -&gt; SynPro vereinigt die Artikel aus den PRs
