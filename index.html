@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Git Workshop für fortgeschrittene Einsteiger / SynPro Solutions @ IEEE Student Branch Graz /09.05.2018</title>
+    <title>Git Workshop für fortgeschrittene Einsteiger / SynPro Solutions @ IEEE Student Branch Graz / 09.05.2018</title>
     <meta charset="utf-8">
     <style>
       @font-face {
@@ -165,7 +165,9 @@ class: center, middle
 
 <!-- begin of slide content -->
 
-# Git Workshop für fortgeschrittene Einsteiger
+# Git Workshop
+
+… für fortgeschrittene Einsteiger
 
 .center[<a href="https://xkcd.com/1597/">![xckd git](includes/xkcd-git.png)</a>]
 
@@ -177,7 +179,7 @@ class: center, middle
 IEEE Student Branch Graz / 09.05.2018
 
 1. Vorstellungsrunde
-2. Arbeiten mit Git
+2. Fortgeschrittenes Arbeiten mit Git
 3. Zeit für Fragen
 
 ---
@@ -188,7 +190,7 @@ IEEE Student Branch Graz / 09.05.2018
 
 <table>
 <tr><td><strong>Darshaka Pathirana:</strong></td><td>Git-User seit 2009</td></tr>
-<tr><td><strong>Michael Prokop:</strong</td><td>Git-User seit 2006</td></tr>
+<tr><td><strong>Michael Prokop:</strong></td><td>Git-User seit 2006</td></tr>
 </table>
 
 Wir bieten Systemadministration und -integration für KMUs (Schwerpunkt Linux) an.
@@ -201,7 +203,10 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 # Vorstellungsrunde
 
 * Wer war bei unserem letzten Workshop dabei?
-* Was erwartest du dir vom Workshop? Wünsche / Vorschläge?
+* Wer seid ihr?
+  * Windows/Mac/Linux-Anwender(in)?
+  * Bevorzugter Editor (Vim/Emacs/Joe/Nano/Sublime/Notepad/…)?
+  * Was erwartest du dir vom Workshop? Wünsche / Vorschläge?
 
 ---
 
@@ -220,6 +225,8 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 <pre><code class="plain hljs remark-code"><span class="hljs-string">% git clone https://github.com/synprosolutions/git-workshop-ieee-2018.git</span>
 </code></pre>
 
+bzw. online:
+
 <a href="https://synpro.solutions/git-workshop-ieee-2018">https://synpro.solutions/git-workshop-ieee-2018</a>
 
 ---
@@ -228,6 +235,7 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 
 * Git ist installiert
 * Git ist konfiguriert (Name, Email, Editor)
+* Github-Account
 
 ---
 
@@ -235,44 +243,62 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 
 ## Forken und Clonen
 
-1. Fork von <a href="https://github.com/SynProSolutions/lorem-ipsum-advanced">lorem-ipsum-advanced</a>
+1. Fork von <a href="https://github.com/SynProSolutions/lorem-ipsum-advanced">https://github.com/SynProSolutions/lorem-ipsum-advanced</a>
 2. Clone von lorem-ipsum-advanced
 
---
+---
 
-## Neue Datei hinzufügen (add / commit)
+# Neue Datei hinzufügen (add / commit)
 
-* git add douglas-adams.txt
-* git commit
-* git show
-* git log
+<pre><code class="plain hljs remark-code">$ git add douglas-adams.md
+$ git commit
+$ git show
+$ git log
+</code></pre>
+
+* Infos zum Github Markdown: <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">https://help.github.com/articles/basic-writing-and-formatting-syntax/</a>
+* Tipp: https://github.com/$GITHUB_ACCOUNT/lorem-ipsum-advanced/edit/master/douglas-adams.md zum Testen der Markdown-Syntax
 
 ---
 
-# Dateien verschieben und löschen
+# Dateien verschieben
 
-* git mv douglas-adams.txt adams.txt
-* git rm
+<pre><code class="plain hljs remark-code">$ git mv douglas-adams.md adams.md
+$ git commit -m "Rename douglas-adams.md to adams.md"
+</code></pre>
 
 --
 
-# Ändergungen rückgängig machen
+# Datei löschen + rückgängig machen
 
-* falschen Text in `adams.txt` hinzufügen
-* git diff
-* git checkout -- adams.txt
+<pre><code class="plain hljs remark-code">$ git rm adams.md
+$ git commit -m "Delete adams.md"
+$ git revert HEAD
+</code></pre>
 
 ---
+
+# Änderungen rückgängig machen
+
+* falschen Text in `adams.md` hinzufügen
+
+<pre><code class="plain hljs remark-code">$ git diff
+$ git checkout -- adams.md
+</code></pre>
+
+--
 
 # git add rückgängig machen
 
-* falschen Text in `adams.txt` hinzufügen
-* git diff
-* git add adams.txt
-* git diff / git diff --cached
-* git status
-* git reset adams.txt
-* git checkout -- adams.txt
+* falschen Text in `adams.md` hinzufügen
+
+<pre><code class="plain hljs remark-code">$ git diff
+$ git add adams.md
+$ git diff / git diff --cached
+$ git status
+$ git reset adams.md
+$ git checkout -- adams.md
+</code></pre>
 
 ---
 
@@ -281,108 +307,144 @@ Git verwenden wir täglich und ist für uns unverzichtbar.
 Wir schreiben ein Buch!
 
 * Kapitel mit zufälligem Artikel aus Wikipedia:
-<a href="https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite">https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite</a>
+<a href="https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite">https://de.wikipedia.org/wiki/Spezial:Zufällige_Seite</a>
 * Infos zum Github Markdown: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 * Jeder Absatz ein eigener Commit!
-* git add $random_artikel   # z.B. harlequin-syndrom.txt
-* git commit
 
----
-
-# Interessante Git-Befehle 1
-
-* git grep
-* git commit --amend
-* git rebase -i (reword)
-* git revert
-* git cherry-pick -x
-
----
-
-# Interessante Git-Befehle 2
-
-* git branch -d / -D
-* git rm --cached
-* git tag
-* git merge
-* git format-patch
-* git reflog
-* man git-rev-parse
-
----
-
-# Interessante Git-Befehle 3
-
-* Which topic branches are not merged yet?
-<pre>
-% git branch -a --no-merged
-</pre>
-
-* Find out which branch/tag contains a change
-<pre>
-% git branch -a --contains $ID
-</pre>
+<pre><code class="plain hljs remark-code">$ git add $random_artikel   # z.B. harlequin-syndrom.md
+$ git commit
+</code></pre>
 
 ---
 
 # Git aliases
 
-<pre>
-% git config --global alias.st status
-% git config --global alias.d diff
-% git config --global alias.l log
-% cat .gitconfig 
+Konfiguration:
+
+<pre><code class="plain hljs remark-code">$ git config --global alias.st status
+$ git config --global alias.d diff
+$ git config --global alias.l log
+$ git config --global alias.ls 'log --stat'
+$ cat .gitconfig
 [alias]
         st = status
         d = diff
         l = log
-</pre>
+        ls = log --stat
+</code></pre>
+
+Anwendung:
+
+<pre><code class="plain hljs remark-code">$ git st
+$ git d
+$ git l
+$ git ls
+</code></pre>
 
 ---
 
-# Git history löschen (Achtung!)
+# Git history ändern (Achtung!)
 
-* git reset --soft COMMIT-ID
-* git reset --hard COMMIT-ID
+<pre><code class="plain hljs remark-code">$ git reset --soft COMMIT-ID
+$ git reset --mixed COMMIT-ID
+$ git reset --hard COMMIT-ID
+$ git commit --amend
+</code></pre>
+
+<div style="text-align:center">
+<img src="https://i.stack.imgur.com/qRAte.jpg" alt="Git Tree Movements visualized" style="width: 80%"/>
+<br />
+<small>Quelle: https://i.stack.imgur.com/qRAte.jpg, via <a href="https://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard">Stackoverflow</a></small>
+</div>
+
+---
+
+# Anwendungsfälle von reset bzw. amend
+
+* amend: Datei letzten Commit hinzufügen/löschen, Commit-Message ändern
+* soft: mehr als nur den letzten Commit ändern (HEAD auf COMMIT-ID stellen, Index behält aber die durchgeführten Änderungen aus dem COmmit)
+* mixed: mehr als nur den letzten Commit ändern (HEAD auf COMMIT-ID stellen, Index hat die Änderungen aber <em>nicht</em>, index entspricht also HEAD -&gt; Dateien sind unstaged)
+* hard: Commits wegwerfen (entspricht --mixed, aber auch Working Directory wird auf COMMIT-ID gestellt und alle Änderungen nach COMMIT-ID verworfen, Achtung!)
 
 ---
 
 # git log advanced
 
-* git log *.txt
-* git log 
-
---
-
-misc
-
-* merge conflicts
+<pre><code class="plain hljs remark-code">$ git log *.md
+$ git log
+</code></pre>
 
 ---
 
-## Branch anlegen
+# Branch anlegen
 
-* git branch herkunft
-* git branch
-* git checkout herkunft
+<pre><code class="plain hljs remark-code">$ git branch herkunft
+$ git branch
+$ git checkout herkunft
+</code></pre>
 
 --
 
 oder
 
-* git checkout -b herkunft
-* git branch
+<pre><code class="plain hljs remark-code">$ git checkout -b herkunft
+$ git branch
+</code></pre>
 
 --
 
 ## Datei dem Branch hinzufügen
 
-* git add herkunft.txt
-* git commit
+<pre><code class="plain hljs remark-code">$ git add herkunft.md
+$ git commit
+</code></pre>
+
+--
+
+## weitere Branches
 
 ---
 
-## weitere Branches
+# Interessante Git-Befehle 1
+
+<pre><code class="plain hljs remark-code">$ git grep
+$ git commit --amend
+$ git rebase -i (reword)
+$ git cherry-pick -x
+</code></pre>
+
+---
+
+# Interessante Git-Befehle 2
+
+<pre><code class="plain hljs remark-code">$ git branch -d / -D
+$ git rm --cached
+$ git tag
+$ git merge
+$ git format-patch
+$ git reflog
+$ man git-rev-parse
+</code></pre>
+
+---
+
+# Interessante Git-Befehle 3
+
+Welche Branches sind noch nicht gemerged:
+
+<pre><code class="plain hljs remark-code">$ git branch -a --no-merged
+</code></pre>
+
+Welcher branch/tag beinhaltet einen Commit:
+
+<pre><code class="plain hljs remark-code">$ git branch -a --contains $ID
+</code></pre>
+
+---
+
+# TODO
+
+* merge conflicts
 
 ---
 
